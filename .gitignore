@@ -1,0 +1,14 @@
+# Private
+.private/
+
+.env
+
+# Unnecessary
+*.old
+*.tmp
+*.log
+*.swp
+
+# OS
+.DS_Store
+
