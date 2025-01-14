@@ -1,3 +1,5 @@
+from config import *
+
 from types.Cross import Cross
 from types.Circle import Circle
 from types.SquarePos import SquarePos
