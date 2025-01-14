@@ -1,7 +1,9 @@
 # Private
 .private/
 
-.env
+# Modules and cache
+pip_modules/
+__pycache__/
 
 # Unnecessary
 *.old
