@@ -4,24 +4,26 @@ from config import *
 # from types.Circle import Circle
 # from types.SquarePos import SquarePos
 
-from utils import Debug
-
 from colorama import Fore
 
 import pygame
 
-import var
+from var import *
 
-if (var.DEV):
-    print(f"{Fore.LIGHTCYAN_EX}[ * ] Initalized as DEV mode")
+if (DEV):
+    print(f"{Fore.LIGHTCYAN_EX}[ * ] Initalized as DEV mode{Fore.RESET}")
 
 pygame.init()
 
-debug = Debug("./.private/logs/main-logs.txt")
+window = pygame.display.set_mode((X, Y))
 
 def main():
-    pass
+    for event in pygame.event.get():
+        if (event.type == pygame.QUIT):
+            pygame.quit()
+            sys.exit(0);
 
 if (__name__ == "__main__"):
-    main()
+    while 1:
+        main()
 
