@@ -2,7 +2,7 @@ from config import *
 from colorama import Fore
 from datetime import datetime
 
-import json
+import var
 
 class Debug:
     save_defaultType: str = "debug"
@@ -23,22 +23,22 @@ class Debug:
             case "error":
                 COLOR_TYPE = Fore.RED
 
-            case "warning":
+            case "warn":
                 COLOR_TYPE = Fore.YELLOW
 
             case _:
-                COLOR_TYPE = None
+                COLOR_TYPE = Fore.RESET
 
                 self.debug("Pass a value at least to param 1", "error")
 
                 return
 
-        debugData = f"[ {datetime.now()} | {COLOR_TYPE.capitalize()} ]" + COLOR_TYPE + msg + Fore.RESET
+        debugData = f"[ {datetime.now()} | {debType.capitalize()} | DEV_MODE: {var.DEV} ] {msg}"
 
-        print(debugData)
+        print(f"{COLOR_TYPE}{debugData}{Fore.RESET}")
 
         if (self.saveFile is not None):
             with open(self.saveFile, "a") as file:
-                file.write(debugData)
+                file.write(f"{debugData}\n")
                 file.flush()
 
