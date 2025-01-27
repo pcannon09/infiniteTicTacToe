@@ -20,7 +20,11 @@ if [[ ! -d "pip_modules" ]]; then
     echo "[ OK ]"
 fi
 
-if [[ "$1" == "install" ]]; then
+if [[ "$1" == "dev" ]]; then
+    libs+=("pyinstaller")
+    libsDef+=("Compile python program with pyinstaller")
+
+elif [[ "$1" == "install" ]]; then
     if [[ "$2" == "" ]]; then
         echo "[ * ] Please pass the package name to install in the second param"
 
@@ -28,6 +32,8 @@ if [[ "$1" == "install" ]]; then
     fi
 
     echo "[ * ] Installing \`$2\`" ; pip3 install --target=./pip_modules $2 ; echo "[ OK ]"
+
+    exit
 
 elif [[ "$1" == "help" ]]; then
     echo -e "[ COMMANDS ]$BOLD"
