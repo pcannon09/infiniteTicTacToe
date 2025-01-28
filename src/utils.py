@@ -11,7 +11,9 @@ class Debug:
         global save_defaultType
 
         self.saveFile = saveFile
-        self.defaultType = defaultType ; save_defaultType = defaultType
+        self.defaultType = defaultType
+
+        save_defaultType = defaultType
 
     def debug(self, msg: str, debType: str = save_defaultType):
         COLOR_TYPE: str | None
