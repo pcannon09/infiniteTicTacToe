@@ -1,3 +1,5 @@
+source ./inc/sh/functions.sh
+
 echo "[ * ] Generating files"
 
 if [[ "$1" == "--ungen" ]]; then
@@ -13,7 +15,6 @@ if [[ "$1" == "--ungen" ]]; then
 fi
 
 printf "[ * ] Creating \`.private/\` "; mkdir ./.private ; echo "[ OK ]"
-printf "[ * ] Creating \`.private/logs\` "; mkdir ./.private/logs ; echo "[ OK ]"
-printf "[ * ] Creating \`.private/logs/main-logs.txt\` "; touch ./.private/logs/main-logs.txt ; echo "[ OK ]"
-printf "[ * ] Creating \`.private/data\` "; mkdir ./.private/data ; echo "[ OK ]"
+
+createLogs ; createData
 
