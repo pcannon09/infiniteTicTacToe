@@ -2,8 +2,6 @@ from config import *
 from colorama import Fore
 from datetime import datetime
 
-import var
-
 class Debug:
     save_defaultType: str = "debug"
 
@@ -16,6 +14,8 @@ class Debug:
         save_defaultType = defaultType
 
     def debug(self, msg: str, debType: str = save_defaultType):
+        from var import DEV
+
         COLOR_TYPE: str | None
 
         match debType:
@@ -28,6 +28,9 @@ class Debug:
             case "warn":
                 COLOR_TYPE = Fore.YELLOW
 
+            case "info":
+                COLOR_TYPE = Fore.CYAN
+
             case _:
                 COLOR_TYPE = Fore.RESET
 
@@ -35,7 +38,7 @@ class Debug:
 
                 return
 
-        debugData = f"[ {datetime.now()} | {debType.capitalize()} | DEV_MODE: {var.DEV} ] {msg}"
+        debugData = f"[ {datetime.now()} | {debType.capitalize()} | DEV_MODE: {DEV} ] {msg}"
 
         print(f"{COLOR_TYPE}{debugData}{Fore.RESET}")
 
