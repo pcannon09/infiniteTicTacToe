@@ -4,10 +4,16 @@ from utils import Debug
 
 DEV: Const = True
 
-X = 500
+X = 422
 Y = 500
 
+squareDimentions: tuple = (3, 3)
+
+squareSize: int = 100
+squareSpacing: int = 150
+
 debug: Const = Debug("./.private/logs/main-logs.txt")
+sysDebug: Const = Debug(".private/logs/game-sys-logs.txt")
 
 class Colors:
     WHITE: Const = (255, 255, 255)
