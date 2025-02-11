@@ -9,6 +9,8 @@ import var
 from colorama import Fore
 
 import pygame
+import sys
+import math
 
 if (var.DEV):
     var.sysDebug.debug(f"{Fore.LIGHTCYAN_EX}[ * ] Initalized as DEV mode{Fore.RESET}", "info")
@@ -19,16 +21,13 @@ window = pygame.display.set_mode((var.X, var.Y), flags=pygame.RESIZABLE)
 
 players: Players = Players("main-players", 1, True)
 
-sqpos1: SquarePos = SquarePos(window, "sq1", 1,
-                            20, True, 5, var.Colors.JETBLACK)
-
-sqpos2: SquarePos = SquarePos(window, "sq2", 2,
-                            20, True, 5, var.Colors.JETBLACK)
-
-sqpos3: SquarePos = SquarePos(window, "sq3", 3,
-                            20, True, 5, var.Colors.JETBLACK)
-
 cross: Shapes = Shapes(window, "main-shapes", "cross")
+
+squarePositions: list[SquarePos] = []
+
+for i in range(0,
+        var.squareDimentions[0] * var.squareDimentions[1]):
+    squarePositions.append(SquarePos(window, f"sq-{i}", i, 20, False, 5, (0, 0, 0)))
 
 def mainUpdate():
     global X, Y
@@ -46,11 +45,10 @@ def main():
     mainUpdate()
 
     # MAIN GAME
-    sqpos1.render(10, 10,                         var.squareSize, var.squareSize)
-    sqpos2.render(10 + var.squareSpacing, 10,     var.squareSize, var.squareSize)
-    sqpos3.render(10 + var.squareSpacing * 2, 10, var.squareSize, var.squareSize)
 
-    cross.render(sqpos1)
+    for i in range(0, var.squareDimentions[0]):
+        for j in range(0, var.squareDimentions[1]):
+            squarePositions[i].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize)
 
     pygame.display.update()
 
