@@ -10,7 +10,6 @@ from colorama import Fore
 
 import pygame
 import sys
-import math
 
 if (var.DEV):
     var.sysDebug.debug(f"{Fore.LIGHTCYAN_EX}[ * ] Initalized as DEV mode{Fore.RESET}", "info")
@@ -19,9 +18,9 @@ pygame.init()
 
 window = pygame.display.set_mode((var.X, var.Y), flags=pygame.RESIZABLE)
 
-players: Players = Players("main-players", 1, True)
-
 cross: Shapes = Shapes(window, "main-shapes", "cross")
+
+players: Players = Players("main-players", cross.shape, True)
 
 squarePositions: list[SquarePos] = []
 
@@ -36,11 +35,16 @@ def mainUpdate():
 
     window.fill(var.Colors.GREY)
 
+def end(exitCode: int) -> None:
+    var.sysDebug.debug("[ * ] End", "warn")
+
+    pygame.quit()
+    sys.exit(exitCode)
+
 def main():
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
-            pygame.quit()
-            sys.exit(0)
+            end(0)
 
     mainUpdate()
 
@@ -48,13 +52,18 @@ def main():
 
     for i in range(0, var.squareDimentions[0]):
         for j in range(0, var.squareDimentions[1]):
-            squarePositions[i].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize)
+            squarePositions[i].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize, players)
+            squarePositions[i].getClick()
 
     pygame.display.update()
 
 if (__name__ == "__main__"):
-    var.sysDebug.debug("", "info")
+    var.sysDebug.debug("[ * ] Starting...", "info")
 
-    while 1:
-        main()
+    try:
+        while 1:
+            main()
+
+    except KeyboardInterrupt:
+       end(0)
 
