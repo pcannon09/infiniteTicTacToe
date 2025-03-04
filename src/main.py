@@ -22,7 +22,9 @@ cross: Shapes = Shapes(window, "main-shapes", "cross")
 
 players: Players = Players("main-players", cross.shape, True)
 
-squarePositions: list[SquarePos] = []
+squarePositions = [[SquarePos(window, "squarePos", (i, j), br=20, color=(10, 10, 10))
+    for j in range(var.squareDimentions[1])]
+    for i in range(var.squareDimentions[0])]
 
 for i in range(0,
         var.squareDimentions[0] * var.squareDimentions[1]):
@@ -50,10 +52,10 @@ def main():
 
     # MAIN GAME
 
-    for i in range(0, var.squareDimentions[0]):
-        for j in range(0, var.squareDimentions[1]):
-            squarePositions[i].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize, players)
-            squarePositions[i].getClick()
+    for i in range(0, var.squareDimentions[0]): # Pos X
+        for j in range(0, var.squareDimentions[1]): # Pos Y
+            squarePositions[i][j].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize, players)
+            squarePositions[i][j].getClick()
 
     pygame.display.update()
 
