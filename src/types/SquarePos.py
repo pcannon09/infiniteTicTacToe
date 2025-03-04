@@ -61,10 +61,10 @@ class SquarePos:
             
             if (mx >= self.x and mx <= self.x + self.w and
                 my >= self.y and my <= self.y + self.h):
+                if (not self.clicked):
+                    self.clicked = True
 
-                self.clicked = True
-
-                return True
+                    return True
 
         return False
 
