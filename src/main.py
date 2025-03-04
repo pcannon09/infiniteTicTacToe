@@ -55,7 +55,9 @@ def main():
     for i in range(0, var.squareDimentions[0]): # Pos X
         for j in range(0, var.squareDimentions[1]): # Pos Y
             squarePositions[i][j].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize, players)
-            squarePositions[i][j].getClick()
+            
+            if (squarePositions[i][j].getClick()):
+                players.switch()
 
     pygame.display.update()
 
