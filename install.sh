@@ -60,7 +60,7 @@ elif [[ "$1" == "list" ]]; then
 fi
 
 for x in "${libs[@]}"; do
-    echo "[ * ] Installing \`$x\`" ; pip3 install --target=./pip_modules $x ; echo "[ OK ]"
+    echo "[ * ] Installing \`$x\`" ; pip3 install $x --break-system-packages ; echo "[ OK ]"
 done
 
 echo "[ DONE ]"
