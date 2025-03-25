@@ -15,6 +15,9 @@ class SquarePos:
         self.id: Const = id
         self.pos: Const = pos
 
+        self.players: list = []
+        self.playerIndex: int = 0
+
         self.borderRad: int = br
         self.borderThickness: int =  borderThickness
 
@@ -36,6 +39,9 @@ class SquarePos:
     def setThickness(self, thickness: int) -> None: self.borderThickness = thickness
     def setFill(self, fill: bool) -> None: self.fill = fill
 
+    def setPlayers(self, players: list) -> None:
+        self.players = players
+
     def render(self, x: int, y: int, w: int, h: int,
                player: Players) -> None:
         self.x = x
@@ -47,8 +53,10 @@ class SquarePos:
                                                    self.w, self.h), self.borderThickness, border_radius=self.borderRad)
 
         if (self.clicked):
-            self.shape.set(player.playerShape)
-            self.shape.render(self)
+            if (player.playerShape.shape is not None):
+                self.shape.set(player.playerShape.shape)
+
+        self.shape.render(self)
 
     def getClick(self) -> bool:
         global mouse
@@ -63,6 +71,12 @@ class SquarePos:
                 my >= self.y and my <= self.y + self.h):
                 if (not self.clicked):
                     self.clicked = True
+                    self.playerIndex += 1
+
+                    print(self.playerIndex)
+
+                    if (self.playerIndex > len(self.players) - 1):
+                        self.playerIndex = 0
 
                     return True
 
