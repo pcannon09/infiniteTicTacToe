@@ -16,11 +16,15 @@ if (var.DEV):
 
 pygame.init()
 
+
 window = pygame.display.set_mode((var.X, var.Y), flags=pygame.RESIZABLE)
 
-cross: Shapes = Shapes(window, "main-shapes", "cross")
+currentShape: str = "cross"
 
-players: Players = Players("main-players", cross.shape, True)
+cross: Shapes = Shapes(window, "main-cross-shape", "cross")
+circle: Shapes = Shapes(window, "main-circle-shape", "circle")
+
+players: Players = Players("main-players", [cross, circle], 1)
 
 squarePositions = [[SquarePos(window, "squarePos", (i, j), br=20, color=(10, 10, 10))
     for j in range(var.squareDimentions[1])]
@@ -44,6 +48,8 @@ def end(exitCode: int) -> None:
     sys.exit(exitCode)
 
 def main():
+    global currentShape
+
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
             end(0)
@@ -57,7 +63,13 @@ def main():
             squarePositions[i][j].render(10 + var.squareSpacing * i, 10 + var.squareSpacing * j, var.squareSize, var.squareSize, players)
             
             if (squarePositions[i][j].getClick()):
-                players.switch()
+                currentShape = "cross" if players.switch() == 1 else "circle"
+
+                print(currentShape)
+
+                print(players.currentPlayer)
+
+            players.render()
 
     pygame.display.update()
 
