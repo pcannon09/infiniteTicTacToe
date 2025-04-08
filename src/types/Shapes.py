@@ -54,5 +54,5 @@ class Shapes:
         
         if (self.image is not None):
             if (bind is not None):
-                self.window.blit(self.image, (bind.x + self.shapePositionSpacing, bind.y + self.shapePositionSpacing))
+                self.window.blit(self.image, (bind.get_rect()[0] + self.shapePositionSpacing, bind.get_rect()[1] + self.shapePositionSpacing))
 

@@ -16,15 +16,19 @@ if (var.DEV):
 
 pygame.init()
 
-
 window = pygame.display.set_mode((var.X, var.Y), flags=pygame.RESIZABLE)
 
-currentShape: str = "cross"
+cross: Shapes = Shapes(window, "main-cross-shape", "cross", shape="cross")
+circle: Shapes = Shapes(window, "main-circle-shape", "circle", shape="circle")
 
-cross: Shapes = Shapes(window, "main-cross-shape", "cross")
-circle: Shapes = Shapes(window, "main-circle-shape", "circle")
+print("AAAA - ", cross.shape)
+print("aaaa - ", circle.shape)
 
-players: Players = Players("main-players", [cross, circle], 1)
+players: Players = Players("main-players",
+                           [circle, cross],
+                           1)
+
+currentShape: str = players.currentShape
 
 squarePositions = [[SquarePos(window, "squarePos", (i, j), br=20, color=(10, 10, 10))
     for j in range(var.squareDimentions[1])]
