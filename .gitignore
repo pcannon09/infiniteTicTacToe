@@ -5,6 +5,11 @@
 pip_modules/
 __pycache__/
 
+# Generated
+main.spec
+out/
+build/
+
 # Unnecessary
 *.old
 *.tmp

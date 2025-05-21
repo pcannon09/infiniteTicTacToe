@@ -24,6 +24,15 @@ if [[ "$1" == "dev" ]]; then
     libs+=("pyinstaller")
     libsDef+=("Compile python program with pyinstaller")
 
+elif [[ "$1" == "build" ]]; then
+	echo "[ * ] Building executable"
+
+	pyinstaller --onefile ./src/main.py --distpath out/
+
+	echo "[ DONE ]"
+
+	exit
+
 elif [[ "$1" == "install" ]]; then
     if [[ "$2" == "" ]]; then
         echo "[ * ] Please pass the package name to install in the second param"
