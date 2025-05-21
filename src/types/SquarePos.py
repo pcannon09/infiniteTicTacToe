@@ -7,9 +7,10 @@ import var
 
 import pygame
 
+
 class SquarePos:
-    def __init__(self, window: pygame.Surface, id: str, pos: int, br: int = 10, fill: bool = False, borderThickness: int = 5,
-                 color: tuple = (0, 0, 0)) -> None:
+    def __init__(self, window: pygame.Surface, id: str, pos: tuple | int, br: int = 10, fill: bool = False,
+                 borderThickness: int = 5, color: tuple = (0, 0, 0)) -> None:
         self.window = window
 
         self.id: Const = id
@@ -19,7 +20,7 @@ class SquarePos:
         self.playerIndex: int = 0
 
         self.borderRad: int = br
-        self.borderThickness: int =  borderThickness
+        self.borderThickness: int = borderThickness
 
         self.fill: bool = fill
         self.clicked: bool = False
@@ -31,12 +32,14 @@ class SquarePos:
         self.w = 0
         self.h = 0
 
-        self.shape: Shapes = Shapes(self.window, "getClick-shape")
+        self.shape: Shapes = Shapes(self.window, f"squarePos-shape-{id}")
 
-        var.sysDebug.debug(f"Init `SquarePos` with ID: {id}", "info")
+        var.sysDebug.debug(f"Init SquarePos with ID: {id}", "info")
 
     def setColor(self, color: tuple) -> None: self.color = color
-    def setThickness(self, thickness: int) -> None: self.borderThickness = thickness
+    def setThickness(
+        self, thickness: int) -> None: self.borderThickness = thickness
+
     def setFill(self, fill: bool) -> None: self.fill = fill
 
     def setPlayers(self, players: list) -> None:
@@ -52,33 +55,22 @@ class SquarePos:
         pygame.draw.rect(self.window, self.color, (self.x, self.y,
                                                    self.w, self.h), self.borderThickness, border_radius=self.borderRad)
 
-        if (self.clicked):
-            if (player.playerShape.shape is not None):
-                self.shape.set(player.playerShape.shape)
-
         self.shape.render(self)
 
-    def getClick(self) -> bool:
-        global mouse
+    def get_rect(self):
+        return [self.x, self.y, self.w, self.h]
 
+    def getClick(self) -> bool:
         mouse = pygame.mouse.get_pressed()
 
-        if (mouse[0]): # Left click (0), Right click (1)
+        if (mouse[0]):  # Left click (0), Right click (1)
             mx: int = pygame.mouse.get_pos()[0]
             my: int = pygame.mouse.get_pos()[1]
-            
+
             if (mx >= self.x and mx <= self.x + self.w and
-                my >= self.y and my <= self.y + self.h):
+                    my >= self.y and my <= self.y + self.h):
                 if (not self.clicked):
                     self.clicked = True
-                    self.playerIndex += 1
-
-                    print(self.playerIndex)
-
-                    if (self.playerIndex > len(self.players) - 1):
-                        self.playerIndex = 0
-
                     return True
 
         return False
-

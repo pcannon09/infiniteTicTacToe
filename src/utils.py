@@ -2,6 +2,7 @@ from config import *
 from colorama import Fore
 from datetime import datetime
 
+
 class Debug:
     save_defaultType: str = "debug"
 
@@ -38,7 +39,8 @@ class Debug:
 
                 return
 
-        debugData = f"[ {datetime.now()} | {debType.capitalize()} | DEV_MODE: {DEV} ] {msg}"
+        debugData = f"[ {datetime.now()} | {debType.capitalize()} | DEV_MODE: {DEV} ] {
+            msg}"
 
         print(f"{COLOR_TYPE}{debugData}{Fore.RESET}")
 
@@ -46,4 +48,3 @@ class Debug:
             with open(self.saveFile, "a") as file:
                 file.write(f"{debugData}\n")
                 file.flush()
-

@@ -5,4 +5,3 @@ import sys
 sys.path.insert(0, "./src/types")
 
 print(sys.path)
-
